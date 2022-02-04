@@ -1,7 +1,7 @@
 <script>
 import { Stretch } from 'svelte-loading-spinners'
 
-let buju = {
+let product = {
   productName: undefined,
   loading: false,
 };
@@ -9,13 +9,13 @@ let buju = {
 let results;
 
 async function getGiftCards() {
-  buju.loading = true;
+  product.loading = true;
   try {
     const returnValue = await fetch("/giftcards");
     const response = await returnValue.json();
     results = response.data;
 
-    buju = {
+    product = {
       productName: results.productName,
       loading: false,
     };
@@ -32,9 +32,9 @@ async function getGiftCards() {
     	<button class="search_button" on:click={getGiftCards}>SEARCH</button>
   	</div>
   	<div>
-    	{#if buju.loading === true}
+    	{#if product.loading === true}
 	  		<Stretch size="50" color="#FFFFFF" unit="px"/>
-		{:else if buju.productName !== undefined }
+		{:else if product.productName !== undefined }
 		<div class="results">
     	  <img class="product_image" src="{results.logoUrls[0]}" alt="gift card images" width="200px"/>
           	  <p class="redeem_instructions">Redeem Instructions: {results.redeemInstruction.verbose}</p>
