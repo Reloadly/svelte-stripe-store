@@ -21,7 +21,6 @@ app.get("/giftcards", (req, res) => {
     .get(url, { headers: headers })
     .then((response) => {
       giftCardsData = response.data;
-      console.log(giftCardsData)
       giftCardsAmount = giftCardsData.fixedRecipientDenominations[0] * 100
       res.send({
         success: true,
